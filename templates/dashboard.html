@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<p class="welcome-heading">Welcome, <span>{{ user }}</span></p>
+
+<div class="card">
+    <h3>Resume Analyzer</h3>
+
+    <form method="POST" action="{{ url_for('dashboard') }}" enctype="multipart/form-data">
+
+        <textarea
+            name="resume"
+            placeholder="Paste your resume here (optional)"></textarea>
+
+        <input
+            type="file"
+            name="file"
+            accept=".pdf,.doc,.docx">
+
+        <input
+            type="text"
+            name="role"
+            placeholder="What do you want to become?"
+            required>
+
+        <button type="submit">Analyze</button>
+
+    </form>
+</div>
+
+{% if result %}
+
+<div class="result">
+
+    {% if result.get("error") %}
+        <p class="error-msg">{{ result.get("error") }}</p>
+    {% endif %}
+
+    <div class="result-section section-skills">
+        <h3>Skills</h3>
+        <ul>
+            {% for s in result.get("skills", []) %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <hr class="result-divider">
+
+    <div class="result-section section-missing">
+        <h3>Missing Skills</h3>
+        <ul>
+            {% for s in result.get("missing_skills", []) %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <hr class="result-divider">
+
+    <div class="result-section section-roadmap">
+        <h3>Roadmap</h3>
+        <ul>
+            {% for s in result.get("roadmap", []) %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <hr class="result-divider">
+
+    <div class="result-section section-interview">
+        <h3>Interview Questions</h3>
+        <ul>
+            {% for s in result.get("interview_questions", []) %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

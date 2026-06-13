@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="history-page-title">Your History</h2>
+
+{% if reports %}
+    {% for r in reports %}
+    <div class="history-card">
+
+        <div class="history-card-header">
+            <span class="history-card-number">Entry #{{ loop.index }}</span>
+            <span class="history-card-date">{{ r.created_at if r.created_at else "" }}</span>
+        </div>
+
+        <div class="history-card-body">
+
+            <div class="resume-preview">
+                <p class="resume-preview-label">Resume Preview</p>
+                <p class="resume-preview-text">{{ r.resume[:150] }}…</p>
+            </div>
+
+            <div class="history-results-grid">
+
+                <div class="history-result-block block-skills">
+                    <h3>Skills</h3>
+                    <ul>
+                        {% for s in r.result.get("skills", []) %}
+                            <li>{{ s }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="history-result-block block-missing">
+                    <h3>Missing Skills</h3>
+                    <ul>
+                        {% for s in r.result.get("missing_skills", []) %}
+                            <li>{{ s }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="history-result-block block-roadmap">
+                    <h3>Roadmap</h3>
+                    <ul>
+                        {% for s in r.result.get("roadmap", []) %}
+                            <li>{{ s }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="history-result-block block-interview">
+                    <h3>Interview Questions</h3>
+                    <ul>
+                        {% for s in r.result.get("interview_questions", []) %}
+                            <li>{{ s }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <div class="history-empty">
+        <span class="history-empty-icon">◎</span>
+        <p>No analyses yet. Head to the dashboard to get started.</p>
+    </div>
+{% endif %}
+
+{% endblock %}

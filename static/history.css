@@ -1,0 +1,207 @@
+/* ============================================================
+   history.css — Past analysis history cards
+   Depends on: base.css
+   ============================================================ */
+
+/* ── Page Heading ── */
+.history-page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #00d4ff;
+    text-shadow: 0 0 20px rgba(0,212,255,0.4);
+    margin-bottom: 32px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.history-page-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,212,255,0.4), transparent);
+}
+
+/* ── History Card ── */
+.history-card {
+    padding: 0;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+/* Top bar with entry number */
+.history-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: rgba(0, 212, 255, 0.06);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.12);
+}
+
+.history-card-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(0,212,255,0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.history-card-date {
+    font-size: 0.75rem;
+    color: rgba(240,240,255,0.35);
+    letter-spacing: 0.04em;
+}
+
+/* Body */
+.history-card-body {
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Resume Preview Block */
+.resume-preview {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+}
+
+.resume-preview-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(240,240,255,0.35);
+    margin-bottom: 8px;
+}
+
+.resume-preview-text {
+    font-size: 13px;
+    color: rgba(240,240,255,0.60);
+    line-height: 1.65;
+    font-style: italic;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* ── Grid of result sections inside card ── */
+.history-results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 640px) {
+    .history-results-grid { grid-template-columns: 1fr; }
+}
+
+/* Individual result block */
+.history-result-block {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.history-result-block h3 {
+    font-size: 0.70rem;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+/* Color coding per section */
+.block-skills h3 {
+    background: rgba(0,212,255,0.10);
+    color: #00d4ff;
+    border: 1px solid rgba(0,212,255,0.25);
+}
+
+.block-missing h3 {
+    background: rgba(255,94,125,0.10);
+    color: #ff5e7d;
+    border: 1px solid rgba(255,94,125,0.25);
+}
+
+.block-roadmap h3 {
+    background: rgba(123,47,247,0.15);
+    color: #a97fff;
+    border: 1px solid rgba(123,47,247,0.28);
+}
+
+.block-interview h3 {
+    background: rgba(0,255,170,0.08);
+    color: #00ffaa;
+    border: 1px solid rgba(0,255,170,0.22);
+}
+
+.history-result-block ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.history-result-block li {
+    font-size: 12.5px;
+    color: rgba(240,240,255,0.75);
+    padding: 7px 10px;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+}
+
+.block-skills li    { border-left-color: rgba(0,212,255,0.5); }
+.block-missing li   { border-left-color: rgba(255,94,125,0.5); }
+.block-roadmap li   { border-left-color: rgba(169,127,255,0.5); }
+.block-interview li { border-left-color: rgba(0,255,170,0.5); }
+
+/* ── Empty State ── */
+.history-empty {
+    text-align: center;
+    padding: 60px 24px;
+    color: rgba(240,240,255,0.3);
+}
+
+.history-empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.4;
+}
+
+.history-empty p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+}
+
+/* ── Hover lift on history cards ── */
+.history-card {
+    transform: perspective(800px) translateZ(0);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
+}
+
+.history-card:hover {
+    transform: perspective(800px) translateY(-5px) rotateX(1deg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .history-card-body { padding: 18px; }
+    .history-page-title { font-size: 1.1rem; }
+}

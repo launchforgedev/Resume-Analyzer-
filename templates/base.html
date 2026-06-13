@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Copilot</title>
+
+    <!-- Base styles (always loaded) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+
+    <!-- Page-specific styles injected by child templates -->
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/history">History</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AI Career Copilot. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
